@@ -56,8 +56,12 @@ app.post("/api/goalsHelp", (req,res) => {
   console.log(req.body)
   let tip = req.body.tip
   tips.push(tip)
-  res.status(200).send("goalHelp")
+  res.status(200).send(tips)
+  console.log(tips)
 });
 
+app.get("/api/tips", (req,res) => {
+  res.status(200).send(tips)
+});
 
 app.listen(4000, () => console.log("Server running on 4000"));

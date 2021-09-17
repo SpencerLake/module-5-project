@@ -29,7 +29,8 @@
     <br>
     <input type="text" id="helpYourself" name="goalHelp">
     <input type="submit" id="sbmtBttn"  value="submit"/>
-
+    <br>
+    <button id="seeTips">See your tips</button>
     <li id="goalHelps" class="">
       <ul></ul>
     </li>
@@ -63,7 +64,7 @@
         .then(
           alert("New fortune added")
         )  
-      }
+      };
 
 
 
@@ -73,9 +74,22 @@
         let newTip = document.createElement('ul')
         axios.post("http://localhost:4000/api/goalsHelp/", {tip})
           .then(
-            document.body.appendChild(newTip)
-          )
+            alert("new tip added")
+          );
+      };  
+
+      document.getElementById("seeTips").onclick = function () {
+        axios.get("http://localhost:4000/api/tips/")
+           .then(function (res) {
+              const data = res.data;
+              document.getElementById('goalHelps').innerHTML = data
+            })
+            .catch(function(err){
+              document.getElementById('goalHelps').innerHTML = 
+              '<li class="bad-text">' + err.message + '</li>'
+            });
       };
+
 
 
 
