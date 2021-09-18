@@ -3,7 +3,7 @@ const cors = require("cors");
 
 const app = express();
 
-
+let tips = [];
 
 
 app.use(cors());
@@ -18,7 +18,6 @@ let fortunes = [
   "You will someday die, live today"
 ];
 
-let tips = [];
 
 
 app.get("/api/compliment", (req, res) => {

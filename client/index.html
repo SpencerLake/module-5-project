@@ -80,14 +80,17 @@
 
       document.getElementById("seeTips").onclick = function () {
         axios.get("http://localhost:4000/api/tips/")
-           .then(function (res) {
-              const data = res.data;
-              document.getElementById('goalHelps').innerHTML = data
+           .then(res => {
+              const data = document.createElement('ul')
+              let stuff = res.data
+              for(let i = 0; i < stuff.length; i++){
+              let glTip = stuff[i]
+                data.textContent = glTip
+                document.getElementById('goalHelps').append(data)
+                console.log(stuff[i])
+              }
             })
-            .catch(function(err){
-              document.getElementById('goalHelps').innerHTML = 
-              '<li class="bad-text">' + err.message + '</li>'
-            });
+            .catch(err => console.log(err));
       };
 
 
