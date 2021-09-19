@@ -31,9 +31,7 @@
     <input type="submit" id="sbmtBttn"  value="submit"/>
     <br>
     <button id="seeTips">See your tips</button>
-    <li id="goalHelps" class="">
-      <ul></ul>
-    </li>
+    <ul id="goalHelps" class=""></ul>
 
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -78,17 +76,19 @@
           );
       };  
 
+      const getThemTips = document.getElementById('goalHelps')
+
       document.getElementById("seeTips").onclick = function () {
         axios.get("http://localhost:4000/api/tips/")
            .then(res => {
+
               const data = document.createElement('ul')
               let stuff = res.data
-              for(let i = 0; i < stuff.length; i++){
-              let glTip = stuff[i]
-                data.textContent = glTip
-                document.getElementById('goalHelps').append(data)
-                console.log(stuff[i])
-              }
+              getThemTips.innerHTML = stuff
+                .map(tips => {
+                  return '<li class="row">' + tips
+                })
+                .join("")
             })
             .catch(err => console.log(err));
       };
